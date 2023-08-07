@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PREVIEW_POSTS_URL = "http://localhost:3001/preview";
+import { PreviewPost, PreviewPostApiResponse } from "../types/Post";
+
+const PREVIEW_POSTS_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/preview`;
 
 const usePreviewPosts = () => {
-  const [previewPosts, setPreviewPosts] = useState([]);
+  const [previewPosts, setPreviewPosts] = useState<PreviewPost[]>([]);
 
   useEffect(() => {
     const fetchPreviewPosts = async () => {
       try {
-        const response = await axios.get(PREVIEW_POSTS_URL);
+        const response: PreviewPostApiResponse = await axios.get<PreviewPost[]>(
+          PREVIEW_POSTS_URL
+        );
         setPreviewPosts(response.data);
       } catch (e) {
         console.log("Error retrieving preview posts:", e);
