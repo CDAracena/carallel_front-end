@@ -1,10 +1,9 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import usePreviewPosts from "../hooks/usePreviewPosts";
+import Link from "next/link";
 
-interface PreviewPost {
-  id: number;
-  title: string;
-}
+import { PreviewPost } from "../types/Post";
+
 export default function Page() {
   const { user } = useUser();
   const previewPosts = usePreviewPosts();
@@ -13,15 +12,15 @@ export default function Page() {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h1>Article Previews</h1>
       {user ? (
-        <a href="/api/auth/logout">Logout</a>
+        <Link href="/api/auth/logout">Logout</Link>
       ) : (
-        <a href="/api/auth/login">Login to read full articles</a>
+        <Link href="/api/auth/login">Login to read full articles</Link>
       )}
       <hr />
       {previewPosts?.map((previewPost: PreviewPost) => (
-        <a key={previewPost.id} href={`/resources/${previewPost.id}`}>
+        <Link key={previewPost.id} href={`/resources/${previewPost.id}`}>
           {previewPost.title}
-        </a>
+        </Link>
       ))}
     </div>
   );

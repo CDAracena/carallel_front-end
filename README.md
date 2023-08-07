@@ -19,3 +19,4 @@ You'll need to define the following environment variables from your Auth0 applic
 - AUTH0_CLIENT_SECRET
 - AUTH0_AUDIENCE
 - AUTH0_SCOPE
+- NEXT_PUBLIC_API_BASE_URL (http://localhost:3001)
